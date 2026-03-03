@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trivee Healthcare | Specialized Healthcare Staffing</title>
+    <link rel="icon" type="image/jpeg" href="icon2.png">
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
-            --primary: #0056b3; /* Deep Medical Blue */
-            --secondary: #00a8cc; /* Teal/Clean Blue */
+            --primary: #3A5F7D; /* Deep Medical Blue */
+            --secondary: #3A5F7D; /* Teal/Clean Blue */
             --accent: #ff6b6b; /* Soft Red for CTA */
             --dark: #333333;
             --light: #f4f7f6;
@@ -17,6 +18,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { overflow-x: hidden; }
         body { font-family: var(--font-main); color: var(--dark); line-height: 1.6; background-color: var(--white); }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { list-style: none; }
@@ -25,14 +27,15 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .btn { display: inline-block; padding: 12px 30px; border-radius: 5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; }
         .btn-primary { background: var(--primary); color: var(--white); }
-        .btn-primary:hover { background: #004494; }
+        .btn-primary:hover { background: #3A5F7D; }
         .btn-secondary { background: var(--white); color: var(--primary); border: 2px solid var(--primary); }
         .btn-secondary:hover { background: var(--light); }
         .section-padding { padding: 80px 0; }
         .text-center { text-align: center; }
         
         /* --- HEADER --- */
-        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
+        header { background: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: fixed; top: 0; width: 100%; z-index: 1000; }
+        body { padding-top: 70px; }
         nav { display: flex; justify-content: space-between; align-items: center; height: 70px; }
         .logo { font-size: 24px; font-weight: 800; color: var(--primary); }
         .logo span { color: var(--secondary); }
@@ -41,7 +44,7 @@
         
         /* --- HERO SECTION --- */
         .hero { 
-            background: linear-gradient(rgba(0, 86, 179, 0.8), rgba(0, 50, 100, 0.9)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background: linear-gradient(#3A5F7D, #3a5f7dc9), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
             background-size: cover; background-position: center; color: var(--white); padding: 120px 0; text-align: center; 
         }
         .hero h1 { font-size: 3rem; margin-bottom: 20px; font-weight: 700; }
@@ -83,14 +86,32 @@
         footer { background: #1a1a1a; color: #888; padding: 50px 0 20px; }
         .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px; }
         .footer-col h3 { color: var(--white); margin-bottom: 20px; }
-        .footer-col ul li { margin-bottom: 10px; }
+        .footer-col ul li { margin-bottom: 10p21x; }
         .copyright { border-top: 1px solid #333; padding-top: 20px; text-align: center; font-size: 0.9rem; }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
             .about-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; } /* Simplified for prototype */
+            /* larger logo on mobile */
+            .logo-icon { width: 140px; height: 140px; }
+            /* extremely large nav padding with minimal left space for corner logo */
+            nav { padding: 50px 40px 50px 10px; }
+            /* hide nav links by default on mobile and avoid shifting page */
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+                background: var(--white);
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                width: 250px;
+                padding: 15px;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                transition: right 0.3s ease-in-out;
+            }
+            .nav-links.show { right: 0; }
         }
     </style>
 </head>
@@ -98,16 +119,86 @@
 
     <header>
         <div class="container">
-            <nav>
-                <div class="logo">Trivee<span>Healthcare</span></div>
-                <ul class="nav-links">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#staff">Staffing</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-                
-            </nav>
+<nav>
+    <div class="logo">
+        <img src="icon.png" alt="TriVee Logo" class="logo-icon">
+        <span></span>
+        <style>
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 75px 40px;
+    
+}
+
+/* hamburger button */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background: #333;
+}
+@media (max-width: 768px) {
+    .hamburger { display: flex; }
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #3d3d3d; /* Theme color */
+}
+
+.logo-icon {
+    width: 200px;
+    height: 200px;
+    margin-right: 10px;
+    object-fit: contain;
+}
+
+/* ensure logo shrinks on small devices even after inline styles */
+@media (max-width: 768px) {
+    .logo-icon { width: 140px; height: 140px; }
+    /* smaller nav padding on mobile with left corner logo */
+    nav { padding: 50px 40px 50px 10px; }
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+</style>
+    </div>
+
+    <div class="hamburger" id="hamburger">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#staff">Staffing</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
         </div>
     </header>
 
@@ -229,6 +320,14 @@
     </section>
 
     <footer id="contact">
+<script>
+// hamburger toggle script
+const hamburger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('show');
+});
+</script>
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
@@ -247,8 +346,9 @@
                     <h3>Contact Us</h3>
                     <ul>
                         <li>Email: triveehealthcare@gmail.com</li>
-                        <li>Phone: 9847500892</li>
-                        <li>Phone: +91 83180 06077</li>
+                        <li>Phone Number</li>
+                        <li>Binu Mahid S - 9847500892</li>
+                        <li>Dr. Vishnu. N - 8318006077</li>
                         <li>Location: TriVee Healthcare
 52/3141-A1
 Bank road 
